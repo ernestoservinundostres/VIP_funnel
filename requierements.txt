@@ -1,5 +1,5 @@
 pandas
 streamlit
-matplotlib.pyplot
-plotly.graph_object
+matplotlib
+plotly
 mycolorpy
