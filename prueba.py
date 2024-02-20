@@ -5,9 +5,11 @@ import matplotlib.cm as cm
 import matplotlib.colors as mcolors
 
 # Load the example files
-prev_df = pd.read_csv('/Fil/logs_202310_prev.csv')
-post_df = pd.read_csv('/Mau/202310_post.txt', sep='\t')
-post1_df = pd.read_csv('/Mau/202310_post1.txt', sep='\t')
+prev_df = pd.read_csv('/Users/claudiaeenriquezgracia/Downloads/logs_202310_prev.csv')
+post_df = pd.read_csv('/Users/claudiaeenriquezgracia/Downloads/202310_post.txt', sep='\t')
+post1_df = pd.read_csv('/Users/claudiaeenriquezgracia/Downloads/202310_post1.txt', sep='\t')
+print(post1_df['Target'].dtype)
+post1_df['Target'] = post1_df['Target'].astype(str) + '_post'
 
 # Define the pivotal node
 pivotal_action = "Click on Button for purchase membership"
@@ -23,7 +25,7 @@ nodes_post1 = np.unique(post1_df[['Source', 'Target']].values)
 all_nodes = np.unique(np.concatenate((nodes_prev, nodes_post, nodes_post1)))
 
 # Generate colors for nodes using matplotlib
-def gen_colors(n, cmap_name='viridis'):
+def gen_colors(n, cmap_name='nipy_spectral'):
     cmap = cm.get_cmap(cmap_name, n)
     colors = [mcolors.rgb2hex(cmap(i)) for i in range(n)]
     return colors
@@ -63,6 +65,7 @@ for _, row in post1_df.iterrows():
 
 # Create the Sankey diagram
 fig = go.Figure(data=[go.Sankey(
+    arrangement='snap',
     node=dict(
         pad=15,
         thickness=20,
@@ -78,5 +81,6 @@ fig = go.Figure(data=[go.Sankey(
     )
 )])
 
-fig.update_layout(title_text="VIP Funnel - October 2023", font_size=10, height=800)
+fig.update_layout(title_text="VIP Funnel - October 2023", font_size=10, height=800, width=1000)
 fig.show()
+print(post1_df['Target'].head())

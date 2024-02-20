@@ -3,12 +3,14 @@ import streamlit as st
 import plotly.graph_objects as go
 from mycolorpy import colorlist as mcp
 import numpy as np
-
-
+import pygsheets as pyg
+from streamlit_gsheets import GSheetsConnection
 
 st.set_page_config(layout="wide")
 
 st.title('VIP Funnel')
+conn = st.connection("gsheets", type=GSheetsConnection)
+prueba = conn.read('prueba')
 
 
 option = st.selectbox(
@@ -78,7 +80,7 @@ prev.rename(columns= {'num_actions':'# Clicks','prev_action':'Acción previa'}, 
 
 st.plotly_chart(fig, use_container_width=True)
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.write("Acciones previas")
@@ -99,4 +101,5 @@ with col3:
     st.table(post1)
     # st.dataframe(post1,use_container_width=True)
     # st.markdown(post1.style.hide(axis="index").to_html(), unsafe_allow_html=True)
-
+with col4:
+    st.dataframe(prueba)
