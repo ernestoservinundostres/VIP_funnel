@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 
 st.title('VIP Funnel')
 conn = st.connection("gsheets", type=GSheetsConnection)
-prueba = conn.read('prueba')
+prueba = conn.read(worksheet='Supplier Catalogue')
 
 
 option = st.selectbox(
