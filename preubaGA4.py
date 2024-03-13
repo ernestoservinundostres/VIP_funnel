@@ -9,7 +9,7 @@ from datetime import datetime, date, timedelta
 import time
 
 # Carga las credenciales de la cuenta de servicio
-credentials = service_account.Credentials.from_service_account_file('/Users/claudiaeenriquezgracia/Documents/undostres/VIP_funnel/CredMc.json')
+credentials = service_account.Credentials.from_service_account_file('C:/Users/UNDOSTRES/Documents/GitHub/VIP_funnel/Quickstart-482c000987ec.json')
 
 # Construye el cliente de la API de Google Analytics Data
 client = BetaAnalyticsDataClient(credentials=credentials)
@@ -24,7 +24,7 @@ campaign= RunReportRequest(
     date_ranges=[DateRange(start_date="2023-01-01", end_date="2024-02-29")],
     dimensions=[Dimension(name="campaignName")],
     metrics=[Metric(name="conversions")],
-    #dimension_filter=FilterExpression(filter=cfilt)# This is for 'page_view',
+    dimension_filter=FilterExpression(filter=cfilt)# This is for 'page_view',
 )
 
 data_campaigns= []
